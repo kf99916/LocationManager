@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'jacoco'
 apply plugin: 'maven-publish'
-
+ 
 android {
     namespace 'com.yayandroid.locationmanager'
 
