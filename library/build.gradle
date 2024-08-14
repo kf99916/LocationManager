@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'jacoco'
+apply plugin: 'maven-publish'
 
 android {
     namespace 'com.yayandroid.locationmanager'
@@ -27,6 +28,13 @@ android {
             testCoverageEnabled true
         }
     }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 dependencies {
@@ -38,4 +46,18 @@ dependencies {
     testImplementation libraries.mockito
 }
 
-apply from: 'maven_push.gradle'
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = GROUP
+            artifactId = POM_ARTIFACT_ID
+            version = VERSION_NAME
+
+            afterEvaluate {
+                from components.release
+            }
+        }
+    }
+}
+
+//apply from: 'maven_push.gradle'
