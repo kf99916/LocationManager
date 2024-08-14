@@ -6,7 +6,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.1'
+        classpath 'com.android.tools.build:gradle:8.5.2'
         classpath 'org.jacoco:org.jacoco.core:0.8.3'
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -26,21 +26,21 @@ allprojects {
 
     project.ext {
         versions = [
-              minSdkVersion    : 14,
-              compileSdkVersion: 33,
-              targetSdkVersion : 33,
-              buildToolsVersion: '33.0.2'
+              minSdkVersion    : 21,
+              compileSdkVersion: 34,
+              targetSdkVersion : 34,
+              buildToolsVersion: '34'
         ]
 
         libraries = [
-              appCompat         : 'androidx.appcompat:appcompat:1.6.1',
-              googlePlayServices: 'com.google.android.gms:play-services-location:21.0.1',
+              appCompat         : 'androidx.appcompat:appcompat:1.7.0',
+              googlePlayServices: 'com.google.android.gms:play-services-location:21.3.0',
 
-              junit             : 'junit:junit:4.12',
+              junit             : 'junit:junit:4.13',
               assertJ           : 'com.squareup.assertj:assertj-android:1.1.1',
-              mockito           : 'org.mockito:mockito-core:4.2.0',
+              mockito           : 'org.mockito:mockito-core:4.11.0',
 
-              leakcanary        : 'com.squareup.leakcanary:leakcanary-android:2.12'
+              leakcanary        : 'com.squareup.leakcanary:leakcanary-android:2.14'
         ]
     }
 }
