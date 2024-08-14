@@ -41,6 +41,11 @@ def getRepositoryPassword() {
 
 publishing {
     publications {
+        release(MavenPublication) {
+            groupId = GROUP
+            artifactId = POM_ARTIFACT_ID
+            version = VERSION_NAME
+        }
         maven(MavenPublication) {
 
             groupId = GROUP
