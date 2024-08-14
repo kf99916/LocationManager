@@ -1,5 +1,6 @@
 package com.yayandroid.locationmanager.providers.locationprovider;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.IntentSender.SendIntentException;
@@ -73,6 +74,7 @@ class GooglePlayServicesLocationSource extends LocationCallback {
         resolvable.startResolutionForResult(activity, RequestCode.SETTINGS_API);
     }
 
+    @SuppressLint("MissingPermission")
     @SuppressWarnings("ResourceType")
     void requestLocationUpdate() {
         // This method is suited for the foreground use cases
@@ -84,6 +86,7 @@ class GooglePlayServicesLocationSource extends LocationCallback {
         return fusedLocationProviderClient.removeLocationUpdates(this);
     }
 
+    @SuppressLint("MissingPermission")
     @SuppressWarnings("ResourceType")
     void requestLastLocation() {
         fusedLocationProviderClient.getLastLocation()
