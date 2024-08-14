@@ -1,5 +1,6 @@
 package com.yayandroid.locationmanager.providers.locationprovider;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
@@ -32,11 +33,13 @@ class DefaultLocationSource {
         return locationManager.isProviderEnabled(provider);
     }
 
+    @SuppressLint("MissingPermission")
     @SuppressWarnings("ResourceType")
     Location getLastKnownLocation(String provider) {
         return locationManager.getLastKnownLocation(provider);
     }
 
+    @SuppressLint("MissingPermission")
     @SuppressWarnings("ResourceType")
     void removeLocationUpdates(LocationListener locationListener) {
         locationManager.removeUpdates(locationListener);
