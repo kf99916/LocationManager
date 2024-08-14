@@ -1,5 +1,6 @@
 package com.yayandroid.locationmanager.helper;
 
+import android.annotation.SuppressLint;
 import android.location.LocationListener;
 import android.location.LocationManager;
 
@@ -24,6 +25,7 @@ public class UpdateRequest {
         run();
     }
 
+    @SuppressLint("MissingPermission")
     @SuppressWarnings("ResourceType")
     public void run() {
         if(StringUtils.isNotEmpty(provider)) {
@@ -31,6 +33,7 @@ public class UpdateRequest {
         }
     }
 
+    @SuppressLint("MissingPermission")
     @SuppressWarnings("ResourceType")
     public void release() {
         if (locationManager != null) locationManager.removeUpdates(locationListener);
