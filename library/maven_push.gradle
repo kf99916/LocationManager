@@ -15,7 +15,7 @@
  */
 
 apply plugin: 'maven-publish'
-apply plugin: 'signing'
+//apply plugin: 'signing'
 
 def isReleaseBuild() {
     return VERSION_NAME.contains("SNAPSHOT") == false
@@ -39,58 +39,58 @@ def getRepositoryPassword() {
     return hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : ""
 }
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-
-            groupId = GROUP
-            artifactId = POM_ARTIFACT_ID
-            version = VERSION_NAME
-
-            pom {
-                name.set(POM_NAME)
-                packaging POM_PACKAGING
-                description POM_DESCRIPTION
-                url.set(POM_URL)
-
-                scm {
-                    url.set(POM_SCM_URL)
-                    connection.set(POM_SCM_CONNECTION)
-                    developerConnection.set(POM_SCM_DEV_CONNECTION)
-                }
-
-                licenses {
-                    license {
-                        name.set(POM_LICENCE_NAME)
-                        url.set(POM_LICENCE_URL)
-                        distribution.set(POM_LICENCE_DIST)
-                    }
-                }
-
-                developers {
-                    developer {
-                        id.set(POM_DEVELOPER_ID)
-                        name.set(POM_DEVELOPER_NAME)
-                    }
-                }
-            }
-        }
-    }
-    repositories {
-        maven {
-            url = version.endsWith("SNAPSHOT") ? getSnapshotRepositoryUrl() : getReleaseRepositoryUrl()
-            credentials {
-                username getRepositoryUsername()
-                password getRepositoryPassword()
-            }
-        }
-    }
-}
-
-signing {
-    required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
-    sign configurations.archives
-}
+//publishing {
+//    publications {
+//        maven(MavenPublication) {
+//
+//            groupId = GROUP
+//            artifactId = POM_ARTIFACT_ID
+//            version = VERSION_NAME
+//
+//            pom {
+//                name.set(POM_NAME)
+//                packaging POM_PACKAGING
+//                description POM_DESCRIPTION
+//                url.set(POM_URL)
+//
+//                scm {
+//                    url.set(POM_SCM_URL)
+//                    connection.set(POM_SCM_CONNECTION)
+//                    developerConnection.set(POM_SCM_DEV_CONNECTION)
+//                }
+//
+//                licenses {
+//                    license {
+//                        name.set(POM_LICENCE_NAME)
+//                        url.set(POM_LICENCE_URL)
+//                        distribution.set(POM_LICENCE_DIST)
+//                    }
+//                }
+//
+//                developers {
+//                    developer {
+//                        id.set(POM_DEVELOPER_ID)
+//                        name.set(POM_DEVELOPER_NAME)
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    repositories {
+//        maven {
+//            url = version.endsWith("SNAPSHOT") ? getSnapshotRepositoryUrl() : getReleaseRepositoryUrl()
+//            credentials {
+//                username getRepositoryUsername()
+//                password getRepositoryPassword()
+//            }
+//        }
+//    }
+//}
+//
+//signing {
+//    required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
+//    sign configurations.archives
+//}
 
 //task androidJavadocs(type: Javadoc) {
 //source = android.sourceSets.main.allJava
