@@ -106,6 +106,6 @@ tasks.register('androidSourcesJar', Jar) {
     from android.sourceSets.main.java.sourceFiles
 }
 
-artifacts {
-    archives androidSourcesJar
-}
+//artifacts {
+//    archives androidSourcesJar
+//}
