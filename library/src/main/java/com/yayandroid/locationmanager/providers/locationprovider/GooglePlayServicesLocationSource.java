@@ -10,6 +10,7 @@ import android.os.Looper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -70,8 +71,13 @@ class GooglePlayServicesLocationSource extends LocationCallback {
                 });
     }
 
-    void startSettingsApiResolutionForResult(@NonNull ResolvableApiException resolvable, Activity activity) throws SendIntentException {
-        resolvable.startResolutionForResult(activity, RequestCode.SETTINGS_API);
+    void startSettingsApiResolutionForResult(@NonNull ApiException apiException, Activity activity) throws SendIntentException {
+        if (apiException instanceof ResolvableApiException) {
+            ((ResolvableApiException) apiException).startResolutionForResult(activity, RequestCode.SETTINGS_API);
+        }
+        else {
+            apiException.getStatus().startResolutionForResult(activity, RequestCode.SETTINGS_API);
+        }
     }
 
     @SuppressLint("MissingPermission")

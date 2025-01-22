@@ -154,7 +154,11 @@ public class GooglePlayServicesLocationProvider extends LocationProvider impleme
 
     @Override
     public void onFailure(@NonNull Exception exception) {
-        int statusCode = ((ApiException) exception).getStatusCode();
+        if (!(exception instanceof ApiException apiException)) {
+            LogUtils.logE("Unknown exception: " + exception);
+            return;
+        }
+        int statusCode = apiException.getStatusCode();
 
         switch (statusCode) {
             case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
@@ -168,8 +172,7 @@ public class GooglePlayServicesLocationProvider extends LocationProvider impleme
                 // Location settings are not satisfied. But could be fixed by showing the user
                 // a dialog.
                 // Cast to a resolvable exception.
-                resolveSettingsApi((ResolvableApiException) exception);
-
+                resolveSettingsApi(apiException);
                 break;
             default:
                 // for other CommonStatusCodes values
@@ -180,14 +183,14 @@ public class GooglePlayServicesLocationProvider extends LocationProvider impleme
         }
     }
 
-    void resolveSettingsApi(@NonNull ResolvableApiException resolvable) {
+    void resolveSettingsApi(@NonNull ApiException apiException) {
         try {
             // Show the dialog by calling startResolutionForResult(),
             // and check the result in onActivityResult().
             LogUtils.logI("We need settingsApi dialog to switch required settings on.");
             if (getActivity() != null) {
                 LogUtils.logI("Displaying the dialog...");
-                getSourceProvider().startSettingsApiResolutionForResult(resolvable, getActivity());
+                getSourceProvider().startSettingsApiResolutionForResult(apiException, getActivity());
                 settingsDialogIsOn = true;
             } else {
                 LogUtils.logI("Settings Api cannot show dialog if LocationManager is not running on an activity!");
